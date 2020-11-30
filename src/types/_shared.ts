@@ -20,6 +20,14 @@ export interface SubDocument extends Types.Subdocument {}
 // subDocument array
 export interface SubDocumentArray<T extends SubDocument>
   extends Types.DocumentArray<T> {
+  filter<S extends T>(
+    callbackfn: (
+      value: T,
+      index: number,
+      array: SubDocumentArray<T>
+    ) => value is S,
+    thisArg?: any
+  ): S[] & SubDocumentArray<S>;
   filter(
     callbackfn: (
       value: T,
@@ -34,6 +42,14 @@ export interface SubDocumentArrayNoId<T extends SubDocumentNoId>
   create(obj: any): T;
   inspect(): T[];
   toObject(options?: any): T[];
+  filter<S extends T>(
+    callbackfn: (
+      value: T,
+      index: number,
+      array: SubDocumentArrayNoId<T>
+    ) => value is S,
+    thisArg?: any
+  ): S[] & SubDocumentArrayNoId<S>;
   filter(
     callbackfn: (
       value: T,
